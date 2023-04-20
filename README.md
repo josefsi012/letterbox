@@ -33,7 +33,7 @@ You will likely want to create your maildirs someplace else. On my system the
 
 ## Redirect port 25
 
-*Never* run this as root.
+> ☠️ *Never* run this as root.
 
 Use a higher port, like 2525, and configure your system's firewall to redirect port 25 to it.
 For example, using nft, you can do this by adding:
@@ -49,16 +49,20 @@ For example, using nft, you can do this by adding:
       }
     }
 
-Or with iptables:
+Or with `iptables`:
 
     *nat
      -A PREROUTING -p tcp -d SERVERIP --dport 25 -j REDIRECT --to-ports 2525
      COMMIT
 
-Replace the SERVERIP with the IP of the server letterbox is running on.
+Replace the `SERVERIP` with the IP of the server letterbox is running on.
 
 
-# WARNING
-
-This code is not meant to be run on the open network. Make sure it is protected behind a firewall,
+> ⚠️ __WARNING__: This code is not meant to be run on the open network. Make sure it is protected behind a firewall,
 and is running as an un-privileged user. *Never* run it as root.
+
+## Building a Docker image
+
+	cd letterbox
+	docker build .
+

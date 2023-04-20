@@ -1,0 +1,15 @@
+version: "2.1"
+services:
+  letterbox:
+    image: letterbox
+    container_name: letterbox
+    volumes:
+      - ${PWD}/config:/config
+      - ${PWD}/data:/data
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    ports:
+      - 2525:25
+    restart: unless-stopped
