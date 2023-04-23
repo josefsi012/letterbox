@@ -82,7 +82,7 @@ If the connection is not from an allowed host the connection will be refused.
 Destination emails must be listed in the `emails` list. The user portion of the
 email will be used to create a new maildir under the `-maildirs` path. For
 example, sending an email to user@another.com will create a new maildir at
-`/data/maildirs` inside the Docker container
+`/data/maildirs` inside the Docker container.
 
 You will likely want to create your maildirs someplace else. Inside the
 `docker-compose.yml` file the default is
