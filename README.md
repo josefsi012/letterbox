@@ -64,5 +64,28 @@ and is running as an un-privileged user. *Never* run it as root.
 ## Building a Docker image
 
 	cd letterbox
-	docker build .
+	docker build -t letterbox .
+	
+## Running letterbox using Docker compose
+
+Before you run docker compose edit the config file
+
+	vi config/letterbox.toml
+	
+Chang `hosts` and `emails`.  You must specify at least one
+host/network and one email otherwise delivery will fail. For example:
+
+    hosts = ["192.168.1.0/24", "127.0.0.1", "logger.mydomain.com"]
+    emails = ["root@mydomain.com", "user@another.com"]
+
+If the connection is not from an allowed host the connection will be refused.
+Destination emails must be listed in the `emails` list. The user portion of the
+email will be used to create a new maildir under the `-maildirs` path. For
+example, sending an email to user@another.com will create a new maildir at
+`/data/maildirs` inside the Docker container
+
+You will likely want to create your maildirs someplace else. Inside the
+`docker-compose.yml` file the default is
+
+	${PWD}/data:/data
 
